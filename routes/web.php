@@ -5,7 +5,8 @@ use App\Http\Controllers\{
     AuthController,
     PelangganController,
     TarifController,
-    PembayaranController
+    PembayaranController,
+    TagihanController
 };
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,17 @@ Route::group(['auth:sanctum'], function () {
         Route::prefix('profil')->group(function () {
             Route::get('/', [PelangganController::class,'profil'])->name('profil');
             Route::post('/save', [PelangganController::class,'saveProfil'])->name('saveProfil');
+        });
+
+        Route::prefix('cekTagihan')->group(function () {
+            Route::get('/', [TagihanController::class,'index'])->name('cekTagihan');
+            Route::post('/cek', [TagihanController::class,'cek'])->name('cek');
+            Route::get('/cekHarga', [TagihanController::class,'bayar'])->name('bayar');
+            Route::get('/detailPembayaran', [TagihanController::class,'detailPembayaran'])->name('detailbayar');
+        });
+
+        Route::prefix('pembayaran')->group(function () {
+            Route::get('/', [PembayaranController::class,'indexUser'])->name('riwayatPembayaran');
         });
     });
 });

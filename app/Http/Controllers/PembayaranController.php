@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pembayaran;
+use App\Models\{
+    Tagihan,
+    Pembayaran,
+    Pelanggan,
+    Penggunaan,
+    User
+};
 use Illuminate\Http\Request;
+use Auth;
+use Validator;
 
 class PembayaranController extends Controller
 {
@@ -15,6 +23,13 @@ class PembayaranController extends Controller
     public function index()
     {
         return view('admin/pembayaran/pembayaran');
+    }
+
+    public function indexUser()
+    {
+        $data = Tagihan::where('user_id',Auth::user()->id)->with('penggunaan')->with('pembayaran')->get();
+        return view('user/pembayaran/bayar',['data'=>$data]);
+        // return $data;
     }
 
     /**

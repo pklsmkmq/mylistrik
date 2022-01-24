@@ -71,8 +71,8 @@
                                 </a>
                             </li>
                         @else
-                            <li class="sidebar-item {{ (request()->segment(2) == 'tarif') ? 'active' : '' }}">
-                                <a href="{{ route('profil') }}" class='sidebar-link'>
+                            <li class="sidebar-item {{ (request()->segment(2) == 'cekTagihan') ? 'active' : '' }}">
+                                <a href="{{ route('cekTagihan') }}" class='sidebar-link'>
                                     <i class="bi bi-tags-fill"></i>
                                     <span>Cek Tagihan</span>
                                 </a>
@@ -80,7 +80,11 @@
                         @endif
 
                         <li class="sidebar-item {{ (request()->segment(2) == 'pembayaran') ? 'active' : '' }}">
-                            <a href="{{ route('pembayaran') }}" class='sidebar-link'>
+                            @if (auth()->user()->roles[0]->name == "admin")
+                                <a href="{{ route('pembayaran') }}" class='sidebar-link'>
+                            @else
+                                <a href="{{ route('riwayatPembayaran') }}" class='sidebar-link'>
+                            @endif    
                                 <i class="bi bi-credit-card-2-front-fill"></i>
                                 <span>Pembayaran</span>
                             </a>

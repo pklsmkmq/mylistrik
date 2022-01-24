@@ -23,7 +23,7 @@
                                                 style="color: black; font-size: xxx-large;text-align: center;">
                                                 Cek Tagihan Listrik Bulan Ini</h4>
                                             <div class="text-center">
-                                                <a href="#">
+                                                <a href="{{ route('cekTagihan') }}">
                                                     <button class="btn btn-primary"
                                                         style="height: 5rem; width: 30rem;font-size: 2.5rem;">
                                                         Lihat Sekarang
@@ -32,8 +32,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
-                                @if ($data == false)
+                                @else
                                     <div class="row">
                                         <div class="col-12">
                                             <h4 class="mb-5"

@@ -53,9 +53,9 @@ class User extends Authenticatable
         return $this->hasOne(Penggunaan::class);
     }
 
-    public function tagian()
+    public function tagihan()
     {
-        return $this->hasOne(Tagian::class);
+        return $this->hasOne(Tagihan::class);
     }
 
     public function pembayaran()
