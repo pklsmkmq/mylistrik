@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\{
     Pelanggan,
     User,
+    Pembayaran,
     Tarif
 };
 use Auth;
@@ -15,7 +16,8 @@ class PelangganController extends Controller
 {
     public function index()
     {
-        return view('admin/pelanggan');
+        $data = Pelanggan::with('user')->with('tarif')->get();
+        return view('admin/pelanggan', ["data" => $data]);
     }
 
     public function ds()
@@ -85,5 +87,16 @@ class PelangganController extends Controller
                 return redirect()->route('profil')->with('error',"Data Gagal Tersimpan");
             }
         }
+    }
+
+    public function dsAdmin()
+    {
+        $data1 = Pelanggan::count();
+        $data2 = Pembayaran::count();
+
+        return view('layout/dashboardV',[
+            'data1' => $data1,
+            'data2' => $data2,
+        ]);
     }
 }

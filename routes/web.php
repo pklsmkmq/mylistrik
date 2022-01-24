@@ -35,9 +35,7 @@ Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
 Route::group(['auth:sanctum'], function () {
     Route::middleware('role:admin')->prefix('admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('layout/dashboardV');
-        })->name('dashboard');
+        Route::get('/dashboard', [PelangganController::class,'dsAdmin'])->name('dashboard');
 
         Route::prefix('tarif')->group(function () {
             Route::get('/', [TarifController::class,'index'])->name('tarif');

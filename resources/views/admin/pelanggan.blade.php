@@ -26,42 +26,35 @@
     </div>
     <section class="section">
         <div class="card">
-            {{-- <div class="card-header">
-                <a href="{{ route('addSantri') }}"><button class="btn btn-outline-primary">Tambah Santri</button></a>
-                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#uploadSantri">Tambah Banyak Santri</button>
-            </div> --}}
             <div class="card-body">
-                {{-- @include('layouts/massage') --}}
-                <table class="table table-striped" id="table1">
+                <table class="table table-striped" id="table1" style="text-align: center">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>KWH</th>
-                            {{-- <th>Kota</th> --}}
+                            <th>No Meteran</th>
+                            <th>Daya</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($data as $item) --}}
+                        @php
+                            $no = 1;    
+                        @endphp
+                        @foreach ($data as $item)
                             <tr>
-                                <td>1</td>
-                                <td>ABCD</td>
-                                <td>Abcd@asba.com</td>
-                                <td>1200</td>
+                                <td>{{ $no }}</td>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->user->email }}</td>
+                                <td>{{ $item->nomor_meteran }}</td>
+                                <td>{{ $item->tarif->daya }}</td>
                                 <td><button class="btn btn-primary">Lihat</button></td>
-                                {{-- <td>
-                                    <a href="{{ route('jurnalSantri',$nisn = $item->nisn) }}"><button class="btn btn-secondary mb-1 float-left mr-1">Jurnal</button></a>
-                                    <a href="{{ route('editSantri',$nisn = $item->nisn) }}"><button class="btn btn-primary mb-1 float-left mr-1">Edit</button></a>
-                                    <form action="{{ route('deleteSantri',$nisn = $item->nisn) }}" method="post">
-                                      @csrf
-                                      @method("delete")
-                                      <button class="btn btn-danger" type="submit">Delete</button>
-                                  </form>
-                                </td> --}}
                             </tr>
-                        {{-- @endforeach --}}
+                            @php
+                                $no++;    
+                            @endphp
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -27,31 +27,34 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                {{-- <a href="#"><button class="btn btn-outline-primary">Tambah Tarif</button></a> --}}
-                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#uploadSantri">Tambah Tarif</button>
             </div>
             <div class="card-body">
-                {{-- @include('layouts/massage') --}}
-                <table class="table table-striped" id="table1">
+                <table class="table table-striped" id="table1" style="text-align: center">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Email</th>
-                            <th>KWH</th>
-                            <th>Aksi</th>
+                            <th>Stand Meteran</th>
+                            <th>Total Bayar</th>
+                            <th>Tanggal Bayar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($data as $item) --}}
+                        @php
+                            $no = 1;    
+                        @endphp
+                        @foreach ($data as $item)
                             <tr>
-                                <td>1</td>
-                                <td>ABCD</td>
-                                <td>Abcd@asba.com</td>
-                                <td>1200</td>
-                                <td><button class="btn btn-primary">Lihat</button></td>
-                               
+                                <td>{{ $no }}</td>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->penggunaan->meter_awal . " - " . $item->penggunaan->meter_akhir }}</td>
+                                <td>Rp. {{ number_format($item->pembayaran->total_bayar,0,',','.') }}</td>
+                                <td>{{ $item->pembayaran->tanggal_pembayaran }}</td>
                             </tr>
+                            @php
+                                $no++;    
+                            @endphp
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -22,7 +22,8 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        return view('admin/pembayaran/pembayaran');
+        $data = Tagihan::with('user')->with('penggunaan')->with('pembayaran')->get();
+        return view('admin/pembayaran/pembayaran',['data'=>$data]);
     }
 
     public function indexUser()
