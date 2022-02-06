@@ -33,8 +33,12 @@ class AuthController extends Controller
             ]);
             $user->assignRole('user');
             $role = "user";
-            // return redirect('welcome');
-            return $user;
+
+            if (Auth::attempt($request->only('email','password'))) {
+                return redirect()->route('dashboardUser');
+            }else{
+                return redirect()->route('awal');
+            }
         }
     }
 

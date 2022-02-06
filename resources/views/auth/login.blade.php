@@ -16,19 +16,11 @@
           <label for="password">Password Anda</label>
           <input type="password" class="form-control" placeholder="Your Password" id="password" name="password">
         </div>
-        
-        <div class="d-flex mb-5 align-items-center">
-          <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-            <input type="checkbox" checked="checked"/>
-            <div class="control__indicator"></div>
-          </label>
-          <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
-        </div>
 
         <input type="submit" value="Log In" class="btn btn-block btn-primary">
       </form>
 
-      <span class="ml-auto text-center">Belum Punya Akun ? <a href="#" class="forgot-pass">Daftar Sekarang</a></span> 
+      <span class="ml-auto text-center">Belum Punya Akun ? <a href="{{ route('regis') }}" class="forgot-pass">Daftar Sekarang</a></span> 
     </div>
   </div>
 </div>    
