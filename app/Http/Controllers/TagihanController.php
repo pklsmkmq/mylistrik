@@ -23,10 +23,13 @@ class TagihanController extends Controller
      */
     public function index()
     {
+        //cek pelanggan
         $cekPel = Pelanggan::where('user_id', Auth::user()->id)->first();
         if ($cekPel) {
+            //cek pengguanaan sebelumnya
             $cek = Penggunaan::where('user_id', Auth::user()->id)->first();
             if ($cek) {
+                //jika sudah ada cek penggunaan bulan ini
                 if ($cek->bulan == date('m') && $cek->tahun == date('Y')) {
                     $status = "sudah";
                     $data = "";
@@ -35,6 +38,7 @@ class TagihanController extends Controller
                         'data' => $data
                     ]);
                 }else{
+                    //jika penggunaan bulan ini belum ada
                     if ($cek->bulan == date('m', strtotime('-1 month', time()))) {
                         $status = "belum";
                         $data = $cek->meter_akhir;
@@ -45,6 +49,7 @@ class TagihanController extends Controller
                     }
                 }
             } else {
+                //penggunaan belum ada
                 $status = "tidak ada";
                 $data = '';
                 return view('user/tagihan/tagihan', [
@@ -53,6 +58,7 @@ class TagihanController extends Controller
                 ]);
             }
         } else {
+            //user tidak ditemukan
             $status = "No profil";
             $data = '';
             return view('user/tagihan/tagihan', [
@@ -64,6 +70,7 @@ class TagihanController extends Controller
 
     public function cek(Request $request)
     {
+        //membutuhkan meteran awal dan akhir
         $rules = array(
             "meteran_awal"=>"required",
             "meteran_akhir"=>"required"
@@ -83,7 +90,9 @@ class TagihanController extends Controller
 
     public function bayar()
     {
+        //ambil data user yang ingin membayar
         $cek = Penggunaan::where('user_id', Auth::user()->id)->first();
+        //jika bulan dan tahunnya sama dengan sekarang maka return sudah
         if ($cek->bulan == date('m') && $cek->tahun == date('Y')) {
             $status = "sudah";
             $data = "";
@@ -93,7 +102,9 @@ class TagihanController extends Controller
             ]);
         }
         
+        //jika meteran awal dan meteran akhir terinput
         if (Session::has('meteran_awal') && Session::has('meteran_akhir')) {
+            //menetapkan harga dengan selisih meterah awal dengan meteran akhir * tarif daya
             $dataPel = Pelanggan::where('user_id', Auth::user()->id)->with('tarif')->first();
             $jumlah_meteran = Session::get('meteran_akhir') - Session::get('meteran_awal');
             $harga = $dataPel->tarif->tarifperkwh * $jumlah_meteran;

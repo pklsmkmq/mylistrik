@@ -24,7 +24,7 @@ class AuthController extends Controller
 
         if($cek->fails()){
             $errorString = implode(",",$cek->messages()->all());
-            return $errorString;
+            return abort('400');
         }else{
             $user = User::create([
                 'name' => $request->name,
@@ -37,7 +37,8 @@ class AuthController extends Controller
             if (Auth::attempt($request->only('email','password'))) {
                 return redirect()->route('dashboardUser');
             }else{
-                return redirect()->route('awal');
+                // return redirect()->route('awal');
+                return abort(400);
             }
         }
     }
@@ -53,7 +54,7 @@ class AuthController extends Controller
 
         if($cek->fails()){
             $errorString = implode(",",$cek->messages()->all());
-            return $errorString;
+            return redirect()->route('awal')->with('warning',$errorString);
         }else{
             if (Auth::attempt($request->only('email','password'))) {
                 $user = User::where('email',$request->email)->first();
@@ -64,7 +65,7 @@ class AuthController extends Controller
                     return redirect()->route('dashboardUser');
                 }
             }else{
-                return redirect()->route('awal');
+                return redirect()->route('awal')->with('warning',"Email / Password Anda Salah");
             }
         }
     }

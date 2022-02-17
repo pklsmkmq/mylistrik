@@ -11,10 +11,11 @@
     <link rel="stylesheet" href={{ url("assets/css/owl.carousel.min.css") }}>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href={{ url("assets/css/bootstrap.min.css") }}>
+    <link rel="stylesheet" href="{{ url('assets_ds/css/bootstrap.css') }}">
     
     <!-- Style -->
     <link rel="stylesheet" href={{ url("assets/css/style.css") }}>
+    <link rel="stylesheet" href="{{ url('assets_ds/vendors/bootstrap-icons/bootstrap-icons.css') }}">
 
     <title>Login My Listrik</title>
   </head>

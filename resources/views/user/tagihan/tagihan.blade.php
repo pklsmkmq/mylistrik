@@ -74,7 +74,9 @@
                                             <div class="form-group">
                                                 <label for="meteran-awal">Meteran Awal</label> 
                                                 <input type="number" id="meteran-awal" class="form-control"
-                                                    placeholder="Masukkan Meteran Awal" name="meteran_awal" required>
+                                                    placeholder="Masukkan Meteran Awal" name="meteran_awal" required @if($status == "belum")
+                                                        value="{{ $data }}" readonly
+                                                    @endif>
                                             </div>
                                         </div>
                                         <div class="col-12">
