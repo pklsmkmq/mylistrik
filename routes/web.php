@@ -48,6 +48,7 @@ Route::group(['auth:sanctum'], function () {
 
         Route::get('/pelanggan', [PelangganController::class,'index'])->name('pelanggan');
         Route::get('/pembayaran', [PembayaranController::class,'index'])->name('pembayaran');
+        Route::get('/pembayaran/{id}', [PembayaranController::class,'detail'])->name('pembayaranDetail');
     });
 
     Route::middleware('role:user')->prefix('pelanggan')->group(function () {

@@ -27,10 +27,10 @@ class TagihanController extends Controller
         $cekPel = Pelanggan::where('user_id', Auth::user()->id)->first();
         if ($cekPel) {
             //cek pengguanaan sebelumnya
-            $cek = Penggunaan::where('user_id', Auth::user()->id)->first();
+            $cek = Penggunaan::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
             if ($cek) {
                 //jika sudah ada cek penggunaan bulan ini
-                if ($cek->bulan == date('m') && $cek->tahun == date('Y')) {
+                if ($cek->bulan == (int)date('m') && $cek->tahun == (int)date('Y')) {
                     $status = "sudah";
                     $data = "";
                     return view('user/tagihan/tagihan', [
@@ -47,6 +47,7 @@ class TagihanController extends Controller
                             'data' => $data
                         ]);
                     }
+                    
                 }
             } else {
                 //penggunaan belum ada

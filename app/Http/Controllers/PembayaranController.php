@@ -26,6 +26,12 @@ class PembayaranController extends Controller
         return view('admin/pembayaran/pembayaran',['data'=>$data]);
     }
 
+    public function detail($id)
+    {
+        $data = Tagihan::where('user_id', $id)->with('user')->with('penggunaan')->with('pembayaran')->get();
+        return view('admin/pembayaran/pembayaran',['data'=>$data]);
+    }
+
     public function indexUser()
     {
         $data = Tagihan::where('user_id',Auth::user()->id)->with('penggunaan')->with('pembayaran')->get();

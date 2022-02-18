@@ -49,7 +49,7 @@
                                 <td>{{ $item->user->email }}</td>
                                 <td>{{ $item->nomor_meteran }}</td>
                                 <td>{{ $item->tarif->daya }}</td>
-                                <td><button class="btn btn-primary">Lihat</button></td>
+                                <td><a href="{{ route('pembayaranDetail', $id = $item->user->id) }}"><button class="btn btn-primary">Lihat</button></td></a>
                             </tr>
                             @php
                                 $no++;    
