@@ -94,13 +94,15 @@ class TagihanController extends Controller
         //ambil data user yang ingin membayar
         $cek = Penggunaan::where('user_id', Auth::user()->id)->first();
         //jika bulan dan tahunnya sama dengan sekarang maka return sudah
-        if ($cek->bulan == date('m') && $cek->tahun == date('Y')) {
-            $status = "sudah";
-            $data = "";
-            return view('user/tagihan/tagihan', [
-                'status' => $status,
-                'data' => $data
-            ]);
+        if ($cek) {
+            if ($cek->bulan == date('m') && $cek->tahun == date('Y')) {
+                $status = "sudah";
+                $data = "";
+                return view('user/tagihan/tagihan', [
+                    'status' => $status,
+                    'data' => $data
+                ]);
+            }
         }
         
         //jika meteran awal dan meteran akhir terinput
@@ -127,13 +129,15 @@ class TagihanController extends Controller
     public function detailPembayaran()
     {
         $cek = Penggunaan::where('user_id', Auth::user()->id)->first();
-        if ($cek->bulan == date('m') && $cek->tahun == date('Y')) {
-            $status = "sudah";
-            $data = "";
-            return view('user/tagihan/tagihan', [
-                'status' => $status,
-                'data' => $data
-            ]);
+        if ($cek) {
+            if ($cek->bulan == date('m') && $cek->tahun == date('Y')) {
+                $status = "sudah";
+                $data = "";
+                return view('user/tagihan/tagihan', [
+                    'status' => $status,
+                    'data' => $data
+                ]);
+            }
         }
         $data = Pelanggan::where('user_id', Auth::user()->id)->with('User')->with('tarif')->first();
         

@@ -89,6 +89,50 @@ class PelangganController extends Controller
         }
     }
 
+    public function saveProfil2(Request $request)
+    {
+        $rules = array(
+            "alamat"=>"required",
+            "nomor_meteran"=>"required",
+            "tarif_id"=>"required",
+            "id" => "required"
+        );
+
+        $cek = Validator::make($request->all(),$rules);
+
+        if($cek->fails()){
+            $errorString = implode(",",$cek->messages()->all());
+            return abort('400');
+        }else{
+            if ($request->type == "update") {
+                try {
+                    $cek = Pelanggan::where('user_id', $request->id)->first();  
+                    
+                    $cek->alamat = $request->alamat;
+                    $cek->nomor_meteran = $request->nomor_meteran;
+                    $cek->tarif_id = $request->tarif_id;
+                    $cek->user_id = $request->id;
+                    $resultPelanggan = $cek->save();
+                } catch (\Throwable $th) {
+                    return abort("400");   
+                }
+            } else {
+                $pelanggan = new Pelanggan();
+                $pelanggan->alamat = $request->alamat;
+                $pelanggan->nomor_meteran = $request->nomor_meteran;
+                $pelanggan->tarif_id = $request->tarif_id;
+                $pelanggan->user_id = $request->id;
+                $resultPelanggan = $pelanggan->save();
+            }
+            
+            if ($resultPelanggan) {
+                return abort("201"); 
+            }else{
+                return abort("400");
+            }
+        }
+    }
+
     public function dsAdmin()
     {
         $data1 = Pelanggan::count();

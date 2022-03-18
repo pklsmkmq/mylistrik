@@ -40,7 +40,7 @@
                                             style="color: black; font-size: xxx-large;text-align: center;">
                                             Pembayaran Bulan Ini Sudah DiBayar Cek Menu Pembayaran</h4>
                                         <div class="text-center">
-                                            <a href="{{ route('cekTagihan') }}">
+                                            <a href="{{ route('riwayatPembayaran') }}">
                                                 <button class="btn btn-primary"
                                                     style="height: 5rem; width: 30rem;font-size: 2.5rem;">
                                                     Cek Pembayaran

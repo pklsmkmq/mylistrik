@@ -21,17 +21,18 @@ use App\Http\Controllers\{
 
 Route::get('/', function () {
     return view('auth/login');
-})->name('awal');;
+})->name('awal');
 Route::get('/login', function () {
     return view('auth/login');
-})->name('loginAwal');;
+})->name('loginAwal');
 Route::get('/register', function () {
     return view('auth/register');
-})->name('regis');;
+})->name('regis');
 
 Route::post('/register', [AuthController::class,'register'])->name('register');
 Route::post('/login', [AuthController::class,'login'])->name('login');
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
+Route::post('/profilPelanggan', [PelangganController::class,'saveProfil2'])->name('profilPelanggan');
 
 Route::group(['auth:sanctum'], function () {
     Route::middleware('role:admin')->prefix('admin')->group(function () {
